@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: app-api
+  main:
+    banner-mode: off
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  level:
+    web: DEBUG
+    sql: DEBUG
+    br:
+      com:
+        smarttraffic:
+          appapi:
+            clients:
+              DirectionsApiClient: DEBUG
+              NotificatorApiClient: DEBUG
+              CognitoOauthApiClient: DEBUG
+
+smart-traffic-security:
+  api-key: ${api-key}
+  app-client-id: ${app-client-id}
+  app-client-secret: ${app-client-secret}
+
+cognito:
+  domain: intelligent-routing-transport-system
+
+endpoints:
+  cognito-oauth: https://${cognito.domain}.auth.sa-east-1.amazoncognito.com
+  smart-traffic-api-gateway: https://jrlpgzdtl1.execute-api.sa-east-1.amazonaws.com/test
+  smart-traffic-directions: ${endpoints.smart-traffic-api-gateway}/directions/api
+  smart-traffic-notificator: ${endpoints.smart-traffic-api-gateway}/notificator
+
+server:
+  servlet:
+    context-path: /app-api
