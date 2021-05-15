@@ -15,7 +15,6 @@ public class InitConfiguration {
     private final CognitoOauthApiClient cognitoOauthApiClient;
 
     @Bean
-    @PostConstruct
     public TokenCache PosConstruct() {
         return new TokenCache(cognitoOauthApiClient);
     }

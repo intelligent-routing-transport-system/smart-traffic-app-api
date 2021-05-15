@@ -16,26 +16,4 @@ public class FeignSmartTrafficConfigurations {
     Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL;
     }
-
-    @Bean
-    RequestInterceptor requestInterceptor(@Value("${smart-traffic-security.api-key}") String apiKey,
-                                          TokenCache tokenCache){
-        return new AuthRequestInterceptor(apiKey, tokenCache.getToken());
-    }
-
-    public class AuthRequestInterceptor implements RequestInterceptor{
-
-        private final String apiKey, token;
-
-        public AuthRequestInterceptor(String apiKey, String token) {
-            this.apiKey = apiKey;
-            this.token = token;
-        }
-
-        @Override
-        public void apply(RequestTemplate requestTemplate) {
-            requestTemplate.header("Authorization",token);
-            requestTemplate.header("x-api-key",apiKey);
-        }
-    }
 }
